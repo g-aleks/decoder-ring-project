@@ -20,6 +20,8 @@ const caesarModule = (function () {
       // if > 25, newIndex -26 : <-25, newIndex + 26
       // add letter from alphabet at newIndex
     // return now populated string
+    let word = "hi"
+    return word;
   }
 
   return {
