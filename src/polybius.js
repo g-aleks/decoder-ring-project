@@ -7,6 +7,7 @@ const polybiusModule = (function () {
   // you can add any code you want within this function scope
 
   function polybius(input, encode = true) {
+    
     let key = {
       11: "a",
       21: "b",
@@ -36,7 +37,8 @@ const polybiusModule = (function () {
     };
     //input.toLowerCase().split("")
     // if !helper(input) return false
-    // for let index in input
+    // if decode = true return _decoder(input)
+    // for let index of input
     // if input[index] = " " {push input[index]}
     // if index = 0 || if index is odd {
     // concat input[index] and input[index] + 1 and push as a string to numberArray
@@ -47,12 +49,24 @@ const polybiusModule = (function () {
     //},[])
     // return letterArray.join("")
   }
-  //function helper(input)
+  //function _helper(input)
   //  let testArr = input.reduce((acc, entry)=>{
   // if entry = " " {return acc}
   // else {acc++}
   // },0)
   // return number % 2 === 0
+
+  //function _decoder(input)
+  // input.toLowerCase().split("")
+  // input.reduce((acc, letter)=>{
+  //  if letter === " " acc.push(letter)
+  //    for (let number in key){
+  //      if key[number] === letter
+  //      acc.push(number)
+  //      return acc
+  //  return acc.join("")
+  // }
+  // },[])
 
   return {
     polybius,
