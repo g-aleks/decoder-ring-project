@@ -7,7 +7,18 @@ const substitutionModule = (function () {
   // you can add any code you want within this function scope
 
   function substitution(input, alphabet, encode = true) {
-    // your solution code here
+    // let realAlphabet = "abcdefghijklmnopqrstuvwxyz".split("")
+    // let decoded = [],
+    // for (let i = 0; i<alphabet.length; i++){
+    //   let fakeLetter = alphabet[i]
+    //   let newObj = {fakeLetter: realAlphabet[i]}
+    //   decoded.push(newObj)
+    // }
+    // let results = input.reduce((acc, letter)=>{
+    //   acc.push(decoded[letter])
+    //   return acc;
+    // },[])
+    // return results.join("")
   }
 
   return {
