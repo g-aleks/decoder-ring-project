@@ -1,5 +1,6 @@
 // Write your tests here!
-const expect = require("chai").expect;
+var {expect} = require('chai')
+const caesar = require("../src/caesar");
   ///error handling///
   describe("caesar", () => {
   it('should return false if the shift amount is 0', ()=>{
@@ -29,4 +30,3 @@ const expect = require("chai").expect;
     const expect = 4
   })
 });
-

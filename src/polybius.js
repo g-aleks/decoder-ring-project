@@ -7,8 +7,66 @@ const polybiusModule = (function () {
   // you can add any code you want within this function scope
 
   function polybius(input, encode = true) {
-    // your solution code here
+    
+    let key = {
+      11: "a",
+      21: "b",
+      31: "c",
+      41: "d",
+      51: "e",
+      12: "f",
+      22: "g",
+      32: "h",
+      42: "i/j",
+      52: "k",
+      13: "l",
+      23: "m",
+      33: "n",
+      43: "0",
+      53: "p",
+      14: "q",
+      24: "r",
+      34: "s",
+      44: "t",
+      54: "u",
+      15: "v",
+      25: "w",
+      35: "x",
+      45: "y",
+      55: "z",
+    };
+    //input.toLowerCase().split("")
+    // if !helper(input) return false
+    // if decode = true return _decoder(input)
+    // for let index of input
+    // if input[index] = " " {push input[index]}
+    // if index = 0 || if index is odd {
+    // concat input[index] and input[index] + 1 and push as a string to numberArray
+    // let letterArray = numberArray.reduce((acc, letter)=>{
+    //if letter = " " {acc.push(letter)}
+    // else {acc.push(key[letter])}
+    // return acc
+    //},[])
+    // return letterArray.join("")
   }
+  //function _helper(input)
+  //  let testArr = input.reduce((acc, entry)=>{
+  // if entry = " " {return acc}
+  // else {acc++}
+  // },0)
+  // return number % 2 === 0
+
+  //function _decoder(input)
+  // input.toLowerCase().split("")
+  // input.reduce((acc, letter)=>{
+  //  if letter === " " acc.push(letter)
+  //    for (let number in key){
+  //      if key[number] === letter
+  //      acc.push(number)
+  //      return acc
+  //  return acc.join("")
+  // }
+  // },[])
 
   return {
     polybius,
