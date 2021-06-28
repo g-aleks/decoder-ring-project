@@ -24,6 +24,24 @@ const caesarModule = (function () {
     return word;
   }
 
+  function caesar(input, shift, encode = true) {
+    encode? console.log(`Encoding...`) : console.log(`Decoding...`)
+    if (!shift || shift < -25 || shift > 25) return false;
+    if (encode === false) shift*= -1;
+    const alphabet = "abcdefghijklmnopqrstuvwxyz".split("")
+    const inputArray = input.toLowerCase().split("")
+    let results = ""
+    for (let letter of inputArray){
+      if (!letter.match(/[a-z]/)) {results+= letter; continue;}; 
+      const index = alphabet.indexOf(letter)
+      let newIndex = index + shift;
+      if (newIndex > 25) {newIndex-=26};
+      if (newIndex < 0) {newIndex+=26}
+      results+= alphabet[newIndex];
+    }
+    return results;
+  }
+
   return {
     caesar,
   };
