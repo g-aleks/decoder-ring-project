@@ -26,7 +26,7 @@ const expect = require("chai").expect;
     expect(actual).to.equal(expect)
   })
   it('should leaves spaces and other symbols as is', ()=>{
-    const expect = 
+    const expect = 4
   })
 });
 
