@@ -1,33 +1,10 @@
 
-
-
-
-let key = {
-    "11": "a",
-    "21": "b",
-    "31": "c",
-    "41": "d",
-    "51": "e",
-    "12": "f",
-    "22" :"g",
-    "32": "h",
-    "42": "i/j",
-    "52": "k",
-    "13": "l",
-    "23": "m",
-    "33": "n",
-    "43": "0",
-    "53": "p",
-    "14": "q",
-    "24": "r",
-    "34": "s",
-    "44": "t",
-    "54": "u",
-    "15": "v",
-    "25": "w",
-    "35": "x",
-    "45": "y",
-    "55": "z",
+function insertAt(array, index, ...elementsArray) {
+        array.splice(index, 0, ...elements);
     }
 
-    console.log(key["35"]);
+    var num = [1,2,3,6,7,8];
+
+    console.log(insertAt(num, 3, 4, 5));
+
+    
