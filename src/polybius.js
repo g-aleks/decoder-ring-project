@@ -59,15 +59,14 @@ const polybiusModule = (function () {
   }
   
   function _encode(inputArray){
-    let results = inputArray.reduce((acc, letter)=>{
+    return inputArray.reduce((acc, letter)=>{
       if (letter === " ") acc.push(letter)
-      if (letter === "i" || letter === "j") acc.push("42")
-      for (let number in key){
-        if (key[number] === letter) acc.push(number)
-      }
+      if (letter === "i" || letter === "j") {acc.push("42")}
+      else {for (let number in key){
+        if (key[number] === letter) acc.push(number)}}
       return acc;
     },[])
-    return results.join("")
+    .join("")
   }
 
   function _decode(noSpace, spaceIndex){
@@ -75,23 +74,16 @@ const polybiusModule = (function () {
     for (let indexStr in noSpace) {
       const index = Number(indexStr);
       if (index === 0 || index % 2 === 0) {
-        const newIndex = index + 1;
-        const concatNumber = noSpace[index] + noSpace[newIndex];
-        numberArray.push(concatNumber);
+        numberArray.push(noSpace[index] + noSpace[index+1]);
       }
     }
 
-    const preSpace = numberArray.reduce((acc, number) => {
-      const letter = key[number];
-      acc.push(letter);
+    let results = numberArray.reduce((acc, number) => {
+      acc.push(key[number]);
       return acc;
     }, []);
-    let results = preSpace;
-
     if (spaceIndex.length > 0) {
-      for (let number of spaceIndex) {
-        results.splice(number, 0, " ");
-      }
+      for (let number of spaceIndex) results.splice(number, 0, " ");
     }
     return results.join("");
   }
