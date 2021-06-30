@@ -19,7 +19,7 @@ const polybiusModule = (function () {
     13: "l",
     23: "m",
     33: "n",
-    43: "0",
+    43: "o",
     53: "p",
     14: "q",
     24: "r",

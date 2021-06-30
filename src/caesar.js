@@ -7,7 +7,6 @@ const caesarModule = (function () {
   // you can add any code you want within this function scope
 
   function caesar(input, shift, encode = true) {
-    encode? console.log(`Encoding...`) : console.log(`Decoding...`)
     if (!shift || shift < -25 || shift > 25) return false;
     if (encode === false) shift*= -1;
     const alphabet = "abcdefghijklmnopqrstuvwxyz".split("")
