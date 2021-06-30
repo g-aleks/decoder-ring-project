@@ -2,64 +2,67 @@
 const expect = require("chai").expect;
 const { caesar } = require("../src/caesar");
 
-describe("Caesar Shift", () => {
-    it("should appropriately encode a message with letters at the beginning of the alphabet with a negative shift", ()=>{
-        const expected = "qeb nrfzh yoltk clu grjmp lsbo qeb ixwv ald."
-        const actual = caesar("the quick brown fox jumps over the lazy dog.", -3)
-        expect(actual).to.eql(expected)
-    })
+// For the Caesar shift (example: caesar("Zebra Magazine", 3) => "cheud pdjdclqh"), the tests that you write should test that the following is true:
 
-    it("should appropriately decode a message with letters at the beginning of the alphabet with a negative shift", ()=>{
-        const expected = "the quick brown fox jumps over the lazy dog"
-        const actual = caesar("qeb nrfzh yoltk clu grjmp lsbo qeb ixwv ald", -3, false)
-        expect(actual).to.eql(expected)
-    })
+//     It returns false if the shift value is equal to 0, less than -25, greater than 25, or not present.
+//     It ignores capital letters. (For example, the results of A Message and a message should be the same.)
+//     When encoding, it handles shifts that go past the end of the alphabet. (For example, shifting z to the right by 3 should cause the z to wrap around to the front of the alphabet, so that z becomes c.)
+//     It maintains spaces and other nonalphabetic symbols in the message, before and after encoding or decoding.
 
-    it("should accurately decode a message with a shift number > 20", ()=>{
-        const expected = "the quick brown fox jumps over the lazy dog"
-        const actual = caesar("pda mqeyg xnksj bkt fqilo kran pda hwvu zkc", 22, false)
-        expect(actual).to.eql(expected)
-    })
 
-    it("should accurately decode a message with a shift number < -20", ()=>{
-        const expected = "the quick brown fox jumps over the lazy dog"
-        const actual = caesar("xli uymgo fvsar jsb nyqtw sziv xli pedc hsk", -22, false)
-        expect(actual).to.eql(expected)
-    })
+describe("Caesar", () => {
 
-    it("should accurately decode a full sentence", ()=>{
-        const expected = "the quick brown fox jumps over the lazy dog"
-        const actual = caesar("ymj vznhp gwtbs ktc ozrux tajw ymj qfed itl", 5, false)
-        expect(actual).to.equal(expected)
-    })
+    describe("Error Handling", ()=>{
 
-    it("should accurately encode a full sentence", ()=>{
-        const expected = "ymj vznhp gwtbs ktc ozrux tajw ymj qfed itl"
-        const actual = caesar("the quick brown fox jumps over the lazy dog", 5)
-        expect(actual).to.equal(expected)
-    })
+        it("should return false if the shift value is equal to 0", () => {
+        const expected = false;
+        const actual = caesar("thinkful", 0);
+        expect(actual).to.eql(expected);
+        });
 
-    it("should accurately encode a message with a shift number > 20", ()=>{
-        const expected = "pda mqeyg xnksj bkt fqilo kran pda hwvu zkc"
-        const actual = caesar("the quick brown fox jumps over the lazy dog", 22)
-        expect(actual).to.eql(expected)
-    })
+        it("it should return false if the shift value is less than -25", () => {
+        const expected = false;
+        const actual = caesar("thinkful", -26);
+        expect(actual).to.eql(expected);
+        });
 
-    it("should accurately encode a message with a shift number < 20", ()=>{
-        const expected = "xli uymgo fvsar jsb nyqtw sziv xli pedc hsk"
-        const actual = caesar("the quick brown fox jumps over the lazy dog", -22)
-        expect(actual).to.eql(expected)
-    })
+        it("should resturn false if the shift value is greater than 25", () => {
+        const expected = false;
+        const actual = caesar("thinkful", 26);
+        expect(actual).to.eql(expected);
+        });
 
-    it("should accurately decode a completely random message with a randomized shift number between -25 and 25", ()=>{
-        expected = "uif rvjdl cspxo gpy kvnqt pwfs uif mbaz eph"
-        const actual = caesar("znk waoiq hxuct lud pasvy ubkx znk rgfe jum", 5, false)
-        expect(actual).to.eql(expected)
+        it("it should return false if no shift value is given", () => {
+        const expected = false;
+        const actual = caesar("thinkful");
+        expect(actual).to.eql(expected);
+        });
     })
+        
+    describe("Special Cases", ()=>{
 
-    it("should accurately encode a completely random message with a randomized shift number between -25 and 25", ()=>{
-        expected = "ocz lpdxf wmjri ajs ephkn jqzm ocz gvut yjb"
-        const actual = caesar("znk waoiq hxuct lud pasvy ubkx znk rgfe jum", 15)
-        expect(actual).to.eql(expected)
+        it("should ignore capital letters", ()=>{
+            const expected = "wklqnixo";
+            const actual = caesar("ThInkfUl", 3)
+            expect(actual).to.equal(expected)
+        })
+
+        it("should handle shifts that go past the end of the alphabet", ()=>{
+            const expected = "iwxczuja";
+            const actual = caesar("thinkful", 15);
+            expect(actual).to.equal(expected);
+        })
+
+        it("should maintain spaces and special characters after encoding", ()=>{
+            const expected = "k3oo0 z0u!g";
+            const actual = caesar("h3ll0 w0r!d", 3)
+            expect(actual).to.eql(expected)
+        })
+
+        it("should maintain spaces and special characters after decoding", () => {
+            const expected = "h3ll0 w0r!d";
+            const actual = caesar("k3oo0 z0u!g", -3);
+            expect(actual).to.eql(expected);
+        });
     })
-  });
+});
