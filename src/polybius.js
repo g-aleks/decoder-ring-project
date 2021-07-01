@@ -40,8 +40,7 @@ const polybiusModule = (function () {
     let spaceIndex = [];
     if (inputArray.some((entry) => entry === " ")) {
       for (let index in inputArray) {
-        const splitIndex = index / 2;
-        if (inputArray[index] === " ") spaceIndex.push(splitIndex);
+        if (inputArray[index] === " ") spaceIndex.push(index/2);
       }
     }
 
@@ -60,10 +59,13 @@ const polybiusModule = (function () {
   
   function _encode(inputArray){
     return inputArray.reduce((acc, letter)=>{
-      if (letter === " ") acc.push(letter)
-      if (letter === "i" || letter === "j") {acc.push("42")}
-      else {for (let number in key){
-        if (key[number] === letter) acc.push(number)}}
+      if (letter === " "){acc.push(letter)}
+      else if (letter === "i" || letter === "j"){acc.push("42")}
+      else {
+        for (let number in key){
+          if (key[number] === letter) acc.push(number)
+        }
+      }
       return acc;
     },[])
     .join("")
@@ -73,7 +75,7 @@ const polybiusModule = (function () {
     let numberArray = [];
     for (let indexStr in noSpace) {
       const index = Number(indexStr);
-      if (index === 0 || index % 2 === 0) {
+      if (index % 2 === 0) {
         numberArray.push(noSpace[index] + noSpace[index+1]);
       }
     }
@@ -91,8 +93,6 @@ const polybiusModule = (function () {
   return {
     polybius,
   };
-
-  //plans for later, write tests, move decode back into main polybius and only call encode if we're encoding since that's much simpler 
 })();
 
 module.exports = { polybius: polybiusModule.polybius };
