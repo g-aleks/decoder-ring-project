@@ -37,27 +37,30 @@ const polybiusModule = (function () {
   function polybius(input, encode = true) {
     
     const inputArray = input.toLowerCase().split("");
+
+    // if there is a space, this stores which index the space is at
+    // the space will be removed from the string to allow us to check the length and easily group number pairs later on (this is why the index is split)
     let spaceIndex = [];
     if (inputArray.some((entry) => entry === " ")) {
       for (let index in inputArray) {
         if (inputArray[index] === " ") spaceIndex.push(index/2);
       }
     }
-
+    // creates space-less string
     const noSpace = inputArray.reduce((acc, entry) => {
       if (entry != " ") acc.push(entry);
       return acc;
     }, []);
-
+    // returns false if there is an odd number of characters
     if (encode === false && noSpace.length % 2 != 0) {
       return false;
     }
-      
-    if (!encode) return _decode(noSpace, spaceIndex)
-    return _encode(inputArray)
+    // calls the respective encode or decode function
+    return encode? _encode(inputArray): _decode(noSpace, spaceIndex)
   }
   
   function _encode(inputArray){
+    // reduces through the array and returns its respective string of numbers according to the key
     return inputArray.reduce((acc, letter)=>{
       if (letter === " "){acc.push(letter)}
       else if (letter === "i" || letter === "j"){acc.push("42")}
@@ -72,6 +75,8 @@ const polybiusModule = (function () {
   }
 
   function _decode(noSpace, spaceIndex){
+    // if the index is even, that index and the next are concatenated and pushed to the number array
+    // [1,2,3,4] becomes [12,34]
     let numberArray = [];
     for (let indexStr in noSpace) {
       const index = Number(indexStr);
@@ -79,11 +84,12 @@ const polybiusModule = (function () {
         numberArray.push(noSpace[index] + noSpace[index+1]);
       }
     }
-
+    // reduces through the new number array and returns its respective string of letters according to the key
     let results = numberArray.reduce((acc, number) => {
       acc.push(key[number]);
       return acc;
     }, []);
+    // if there was a space in the original message, the space is added back in the correct index
     if (spaceIndex.length > 0) {
       for (let number of spaceIndex) results.splice(number, 0, " ");
     }

@@ -3,6 +3,14 @@ const { polybius } = require("../src/polybius");
 
 describe("Polybius", () => {
 
+    describe("Error Handling", ()=>{
+        it("should return false if the message to be decoded is contains an odd number of characters", ()=>{
+            const expected = false
+            const actual = polybius("123", false)
+            expect(actual).to.equal(expected)
+        })
+    })
+
     describe("Encoding", () => {
 
         it("should translate both i and j to 42", () => {

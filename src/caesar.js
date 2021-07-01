@@ -8,17 +8,17 @@ const caesarModule = (function () {
 
   function caesar(input, shift, encode = true) {
     if (!shift || shift < -25 || shift > 25) return false;
-    if (encode === false) shift*= -1;
+    if (encode === false) shift*= -1; // if decoding, we just shift the opposite direction
     const alphabet = "abcdefghijklmnopqrstuvwxyz".split("")
     const inputArray = input.toLowerCase().split("")
     let results = ""
-    for (let letter of inputArray){
-      if (!letter.match(/[a-z]/)) {results+= letter; continue;}; 
-      const index = alphabet.indexOf(letter)
-      let newIndex = index + shift;
-      if (newIndex > 25) {newIndex-=26};
+    for (let letter of inputArray){ 
+      if (!letter.match(/[a-z]/)) {results+= letter; continue;}; // if not a char a-z, it is a space or special character and can just be added to the results string
+      const index = alphabet.indexOf(letter) 
+      let newIndex = index + shift; // shifts the index of the letter to get the index of the encoded/decoded letter
+      if (newIndex > 25) {newIndex-=26}; // accounts for shifts past the end or beginning of the alphabet
       if (newIndex < 0) {newIndex+=26}
-      results+= alphabet[newIndex];
+      results+= alphabet[newIndex]; // adds the shifted letter to the results string
     }
     return results;
   }

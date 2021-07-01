@@ -16,6 +16,11 @@ describe("Substitution", ()=>{
             const actual = substitution("message","abbcdefghijklmnopqrstuvwyx");
             expect(actual).to.eql(expected);
         });
+        it("should return false if no alphabet is entered", ()=>{
+            const expected = false;
+            const actual = substitution("message")
+            expect(actual).to.eql(expected)
+        })
     })
 
     describe("Special Cases", ()=>{
