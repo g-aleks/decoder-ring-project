@@ -21,7 +21,7 @@ const substitutionModule = (function () {
       let newObj = {[fakeLetter]: realAlphabet[i]}
       decoded.push(newObj)
     }
-    let inputArray = input.split("")
+    let inputArray = input.toLowerCase().split("")
     if (!encode) return _decoder(inputArray, decoded)
     return _encoder(inputArray, decoded)
   }
